@@ -8,32 +8,25 @@ st.write(
 '''
 )
 
-ob1 = pd.read_csv('./files/observations_1.csv')
-ob2 = pd.read_csv('./files/observations_2.csv')
-ob3 = pd.read_csv('./files/observations_3.csv')
+st.sidebar.subheader("Upload Files Here :")
 
-st.write(
-'''
-    ### Observation 01:
-'''
+uploaded_file = st.sidebar.file_uploader(
+    label = "Upload your .cvs or excel file here."
 )
-# st.dataframe(ob1)
-st.line_chart(ob1)
 
-st.write(
-'''
-    ### Observation 02:
-'''
-)
-# st.dataframe(ob2)
-st.line_chart(ob2)
+def showGraph(filename):
+    obj = pd.read_csv(filename)
+    st.line_chart(obj)
 
-st.write(
-'''
-    ### Observation 03:
-'''
-)
-# st.dataframe(ob3)
-st.line_chart(ob3)
+if uploaded_file is not None:
+    try:
+        st.write(
+        '''
+            ### Observation :
+        '''
+        )
+        showGraph(uploaded_file)
+    except:
+        print("Somthing goes wrong!")
 
 
